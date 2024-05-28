@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 import {
   CButton,
   CCard,
@@ -21,21 +21,28 @@ import {
   CTableRow,
   CTableBody,
   CTableDataCell,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from '@coreui/react'
 import { SearchOutlined } from '@ant-design/icons';
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button, Input, Space, Table } from 'antd';
 import Highlighter from 'react-highlight-words';import { DocsExample } from 'src/components'
 import { InputDatePicker } from "jalaali-react-date-picker";
 import { exportToExcel } from '../../../utils/exportExcel';
 import { FaRegFileExcel } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa6";
+import { DetGrid } from '../detgrid';
 const data = [
   {
     key: '1',
     name: 'رامتین نوروزی',
-    age: 32,
-    address: '234234576576576545',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '234234576576576545',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
    
@@ -43,144 +50,144 @@ const data = [
   {
     key: '2',
     name: 'فرشاد کاظمی',
-    age: 42,
-    address: '2342343435435435452',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '2342343435435435452',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'علی جهان',
-    age: 32,
-    address: '23454643545345435',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '23454643545345435',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'مریم قربانی',
-    age: 32,
-    address: '8667456534546576787',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '8667456534546576787',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'حسن احمدی',
-    age: 32,
-    address: '6553457653424465756',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '6553457653424465756',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'امیرحسین بنکدار',
-    age: 42,
-    address: '676576574ث565645645',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '676576574ث565645645',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '23786845657657546',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '23786845657657546',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '4354354565465677687',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '4354354565465677687',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: '56768787876876567658',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '56768787876876567658',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'Joe Black',
-    age: 42,
-    address: '76678978768657657',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '76678978768657657',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '45654665765765767835',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '45654665765765767835',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '456456345467689879',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '456456345467689879',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: '2423444556678894645',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2423444556678894645',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'Joe Black',
-    age: 42,
-    address: '876575645678784565464',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '876575645678784565464',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '2343576878978567567',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2343576878978567567',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '2343547665756754654',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2343547665756754654',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'رامتین نوروزی',
-    age: 32,
-    address: '234234576576576545',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '234234576576576545',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
    
@@ -188,144 +195,144 @@ const data = [
   {
     key: '2',
     name: 'فرشاد کاظمی',
-    age: 42,
-    address: '2342343435435435452',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '2342343435435435452',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'علی جهان',
-    age: 32,
-    address: '23454643545345435',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '23454643545345435',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'مریم قربانی',
-    age: 32,
-    address: '8667456534546576787',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '8667456534546576787',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'حسن احمدی',
-    age: 32,
-    address: '6553457653424465756',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '6553457653424465756',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'امیرحسین بنکدار',
-    age: 42,
-    address: '676576574ث565645645',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '676576574ث565645645',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '23786845657657546',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '23786845657657546',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '4354354565465677687',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '4354354565465677687',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: '56768787876876567658',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '56768787876876567658',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'Joe Black',
-    age: 42,
-    address: '76678978768657657',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '76678978768657657',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '45654665765765767835',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '45654665765765767835',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '456456345467689879',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '456456345467689879',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: '2423444556678894645',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2423444556678894645',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'Joe Black',
-    age: 42,
-    address: '876575645678784565464',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '876575645678784565464',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '2343576878978567567',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2343576878978567567',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '2343547665756754654',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2343547665756754654',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'رامتین نوروزی',
-    age: 32,
-    address: '234234576576576545',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '234234576576576545',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
    
@@ -333,135 +340,135 @@ const data = [
   {
     key: '2',
     name: 'فرشاد کاظمی',
-    age: 42,
-    address: '2342343435435435452',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '2342343435435435452',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'علی جهان',
-    age: 32,
-    address: '23454643545345435',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '23454643545345435',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'مریم قربانی',
-    age: 32,
-    address: '8667456534546576787',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '8667456534546576787',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'حسن احمدی',
-    age: 32,
-    address: '6553457653424465756',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '6553457653424465756',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'امیرحسین بنکدار',
-    age: 42,
-    address: '676576574ث565645645',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '676576574ث565645645',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '23786845657657546',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '23786845657657546',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '4354354565465677687',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '4354354565465677687',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: '56768787876876567658',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '56768787876876567658',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'Joe Black',
-    age: 42,
-    address: '76678978768657657',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '76678978768657657',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '45654665765765767835',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '45654665765765767835',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '456456345467689879',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '456456345467689879',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: '2423444556678894645',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2423444556678894645',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '2',
     name: 'Joe Black',
-    age: 42,
-    address: '876575645678784565464',
-    column4:"3432432432432",
+    employeeNumber: 42,
+    accountNumber: '876575645678784565464',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '3',
     name: 'Jim Green',
-    age: 32,
-    address: '2343576878978567567',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2343576878978567567',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
   {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: '2343547665756754654',
-    column4:"3432432432432",
+    employeeNumber: 32,
+    accountNumber: '2343547665756754654',
+    codeShobe:"3432432432432",
     column5:"365476546345",
     column6:"85645634534"
   },
@@ -471,165 +478,74 @@ const data = [
 
 
 const Tooltips = () => {
+const [mockData,setMockData]=useState(data)
+const [toggle,setToggle]=useState(false)
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
-  const searchInput = useRef(null);
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText('');
-  };
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-      <div
-        style={{
-          padding: 8,
-        }}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
-        <Input
-          ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{
-            marginBottom: 8,
-            display: 'block',
-          }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            جستجو
-          </Button>
-          <Button
-            onClick={() => clearFilters && handleReset(clearFilters)}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            پاک کردن
-          </Button>
-          {/* <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({
-                closeDropdown: false,
-              });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button> */}
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              close();
-            }}
-          >
-            بستن
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined
-        style={{
-          color: filtered ? '#1677ff' : undefined,
-        }}
-      />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownOpenChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.current?.select(), 100);
-      }
-    },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{
-            backgroundColor: '#ffc069',
-            padding: 0,
-          }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
-  });
+  const [openModalDetail, setOpenModalDetail] = useState(false);
+  const [getDetail, setGetDetail] = useState();
+  const [nameKarmandy, setNameKarmandy] = useState();
+  const [codeShobe, setCodeShobe] = useState();
+
+
+
+  const handleSearchData = ()=>{
+    console.log(mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.codeShobe==codeShobe && el.employeeNumber==employeeNumber ))
+  setToggle(true)
+  }
   const columns = [
     {
-      title: 'نام کارمند',
+      title: 'نام و نام خانوادگی',
       dataIndex: 'name',
       key: 'name',
      
-      ...getColumnSearchProps('name'),
     },
     {
       title: 'شماره کارمندی',
-      dataIndex: 'age',
-      key: 'age',
+      dataIndex: 'employeeNumber',
+      key: 'employeeNumber',
    
-      ...getColumnSearchProps('age'),
+   //   ...getColumnSearchProps('age'),
     },
     {
       title: 'شماره حساب',
-      dataIndex: 'address',
-      key: 'address',
-      ...getColumnSearchProps('address'),
+      dataIndex: 'accountNumber',
+      key: 'accountNumber',
+      
       // sorter: (a, b) => a.address.length - b.address.length,
       // sortDirections: ['descend', 'ascend'],
     },
     {
-      title: 'ستون 4',
-      dataIndex: 'column4',
-      key: 'column4',
-      ...getColumnSearchProps('column4'),
+      title: 'کد شعبه ',
+      dataIndex: 'codeShobe',
+      key: 'codeShobe',
       // sorter: (a, b) => a.address.length - b.address.length,
       // sortDirections: ['descend', 'ascend'],
     },
+    // {
+    //   title: 'ستون 5',
+    //   dataIndex: 'column5',
+    //   key: 'column5',
+    //   ...getColumnSearchProps('column5'),
+    //   // sorter: (a, b) => a.address.length - b.address.length,
+    //   // sortDirections: ['descend', 'ascend'],
+    // },
+    // {
+    //   title: 'ستون 6',
+    //   dataIndex: 'column6',
+    //   key: 'column6',
+    //   ...getColumnSearchProps('column6'),
+    //   // sorter: (a, b) => a.address.length - b.address.length,
+    //   // sortDirections: ['descend', 'ascend'],
+    // },
     {
-      title: 'ستون 5',
-      dataIndex: 'column5',
-      key: 'column5',
-      ...getColumnSearchProps('column5'),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      // sortDirections: ['descend', 'ascend'],
-    },
-    {
-      title: 'ستون 6',
-      dataIndex: 'column6',
-      key: 'column6',
-      ...getColumnSearchProps('column6'),
-      // sorter: (a, b) => a.address.length - b.address.length,
-      // sortDirections: ['descend', 'ascend'],
-    },
-    {
-      title: 'عملیات',
+      title: 'صورتحساب',
       dataIndex: '',
       key: 'x',
-      render: () =><FaFolderOpen style={{cursor:"pointer"}} />
+      render: (e) =>
+        <FaFolderOpen style={{cursor:"pointer"}} onClick={()=>{sendDet(e)}} />
+     
 ,
     },
   ];
@@ -640,6 +556,7 @@ const Tooltips = () => {
   const [employeeNumber, setEmployeeNumber] = useState(null)
   const [accountNumber, setAccountNumber] = useState(null)
 
+  console.log(mockData,mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.codeShobe==codeShobe && el.employeeNumber==employeeNumber ),toggle)
 
   const handleSubmit = (e) => {
 e.preventDefault()
@@ -658,11 +575,16 @@ setFromDate(null)
 setToDate(null)
 
   }
+  const sendDet = (e)=>{
+    setGetDetail(e)
+    setOpenModalDetail(true)
+    
+  }
   return (
     <>
     {
       window.localStorage.getItem("TOKENAVIN") ?  
-      <div style={{minHeight:"130vh"}}>
+      <div  >
       <CForm
         className="row g-3 needs-validation"
         noValidate
@@ -670,41 +592,60 @@ setToDate(null)
         onSubmit={handleSubmit}
         style={{fontSize:"11px",fontWeight:"800"}}
       >
-        <CCol md={3} className="position-relative">
-          <CFormLabel >از تاریخ :</CFormLabel>
-          <InputDatePicker onChange={inputHandlerFromDate} value={fromDate} />
        
-        </CCol>
-        <CCol md={3} className="position-relative">
-          <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
-          <InputDatePicker  onChange={inputHandlerToDate}  value={toDate}  />
-                  <CFormFeedback tooltip valid>
-            Looks good!
-          </CFormFeedback>
-        </CCol>
        
    
-        <CCol md={3} className="position-relative">
+        <CCol md={2} className="position-relative">
           <CFormLabel htmlFor="validationTooltip05">شماره کارمندی : </CFormLabel>
           <CFormInput min={0} type="number" id="validationTooltip05" value={employeeNumber} onChange={(e)=>{setEmployeeNumber(e.target.value)}}  />
           <CFormFeedback tooltip invalid>
             Please provide a valid zip.
           </CFormFeedback>
         </CCol>
-        <CCol md={3} className="position-relative" >
+        <CCol md={2} className="position-relative" >
           <CFormLabel htmlFor="validationTooltip05"  >  شماره حساب : </CFormLabel>
           <CFormInput type="number" min={0} id="validationTooltip05" value={accountNumber} onChange={(e)=>{setAccountNumber(e.target.value)}}  />
           <CFormFeedback tooltip invalid>
             Please provide a valid zip.
           </CFormFeedback>
         </CCol>
-  
-        <CCol xs={1} className="position-relative" >
-          <CButton  type="submit" style={{fontSize:"10px",fontWeight:"400",   backgroundColor:"#4CAF50",color:"white"}}>
+        <CCol md={2} className="position-relative" >
+          <CFormLabel htmlFor="validationTooltip05"  >  نام و نام خانوادگی : </CFormLabel>
+          <CFormInput  id="validationTooltip06" value={nameKarmandy} onChange={(e)=>{setNameKarmandy(e.target.value)}}   />
+          <CFormFeedback tooltip invalid>
+            Please provide a valid zip.
+          </CFormFeedback>
+        </CCol>
+        <CCol md={2} className="position-relative" >
+          <CFormLabel htmlFor="validationTooltip05"  > کد شعبه: </CFormLabel>
+          <CFormInput type="number" min={0} id="validationTooltip07" value={codeShobe}  onChange={(e)=>{setCodeShobe(e.target.value)}}   />
+          <CFormFeedback tooltip invalid>
+            Please provide a valid zip.
+          </CFormFeedback>
+        </CCol>
+       
+        <CCol md={2} className="position-relative">
+          <CFormLabel >از تاریخ :</CFormLabel>
+          <InputDatePicker onChange={inputHandlerFromDate} value={fromDate} style={{minWidth:"140px"}}  />
+       
+        </CCol>
+        <CCol md={2} className="">
+          <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
+          <InputDatePicker  onChange={inputHandlerToDate}  value={toDate}  style={{minWidth:"140px"}} />
+                  <CFormFeedback tooltip valid>
+            Looks good!
+          </CFormFeedback>
+        </CCol>
+        <CCol md={12} className="position-relative" >
+        </CCol>
+        <CCol style={{maxWidth:"10%"}} className="position-relative " >
+          <CButton onClick={handleSearchData}  type="submit" style={{fontSize:"10px",fontWeight:"400",   backgroundColor:"#4CAF50",color:"white"}}>
+        
          جستجو
+         <FaMagnifyingGlass className='mx-1'  />
           </CButton>
         </CCol>
-        <CCol xs={2} className="position-relative">
+        <CCol xs={2} className="position-relative ">
           <CButton style={{fontSize:"10px",fontWeight:"400",color:"#FFF",backgroundColor:"#e33044"}} onClick={emptyInputs} >
          پاک کردن پارامتر
           </CButton>
@@ -717,7 +658,34 @@ setToDate(null)
       </CButton>
   
       </div>
-      <Table   columns={columns} dataSource={data}  pagination={{ pageSize:50 }} scroll={{ y: 740 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  />
+ {
+   employeeNumber && accountNumber && nameKarmandy && codeShobe && toggle
+  
+  ?     <>  <Table rowClassName={(record,index)=>index%2===0 ?'stripedRow' :'stripedRow2'}   columns={columns} dataSource={mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.codeShobe==codeShobe && el.employeeNumber==employeeNumber )}  pagination={{ pageSize:50 }} scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  /></>
+
+  
+  :     employeeNumber && accountNumber && nameKarmandy && toggle 
+
+  ? <><Table rowClassName={(record,index)=>index%2===0 ?'stripedRow' :'stripedRow2'}   columns={columns} dataSource={mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.employeeNumber==employeeNumber )}  pagination={{ pageSize:50 }} scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  /></>
+  
+  : <Table rowClassName={(record,index)=>index%2===0 ?'stripedRow' :'stripedRow2'}   columns={columns} dataSource={[...mockData]}  pagination={{ pageSize:50 }} scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  />
+
+ }
+      <CModal
+      visible={openModalDetail}
+      onClose={() => setOpenModalDetail(false)}
+      aria-labelledby="LiveDemoExampleLabel"
+    size='xl'
+    >
+      <CModalHeader>
+        <CModalTitle id="LiveDemoExampleLabel" style={{fontSize:"13px"}} > صورتحساب </CModalTitle>
+      </CModalHeader>
+      <CModalBody>
+     <DetGrid getDetail={getDetail} />
+      </CModalBody>
+      
+    </CModal>
+    
       {/* <CTable className='my-5' style={{fontSize:"12px"}} >
     <CTableHead>
       <CTableRow>
@@ -765,8 +733,8 @@ const Validation = () => {
 
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardHeader style={{fontSize:"13px"}} >
-           نام فرم
+          <CCardHeader style={{fontSize:"13px",backgroundColor:"#212631",color:"white"}} >
+         فرم نمونه
           </CCardHeader>
           <CCardBody>
 

@@ -74,22 +74,8 @@ const AppHeader = () => {
           </CNavItem> */}
           کاربر علیرضا مرادی خوش آمدید !
         </CHeaderNav>
-        <CHeaderNav className="ms-auto">
-          {/* <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
-            </CNavLink>
-          </CNavItem> */}
+        <CHeaderNav className="mx-auto">
+     <p  style={{color:"#de2f43"}} >   سامانه جامع FPL  </p>
         </CHeaderNav>
         <CHeaderNav>
         {/* <li className="nav-item py-1">
