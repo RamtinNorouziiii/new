@@ -1,4 +1,4 @@
-import React, { useState,useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   CButton,
   CCard,
@@ -30,456 +30,21 @@ import {
 import { SearchOutlined } from '@ant-design/icons';
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button, Input, Space, Table } from 'antd';
-import Highlighter from 'react-highlight-words';import { DocsExample } from 'src/components'
+import Highlighter from 'react-highlight-words'; import { DocsExample } from 'src/components'
 import { InputDatePicker } from "jalaali-react-date-picker";
 import { exportToExcel } from '../../../utils/exportExcel';
 import { FaRegFileExcel } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa6";
 import { DetGrid } from '../detgrid';
-const data = [
-  {
-    key: '1',
-    name: 'رامتین نوروزی',
-    employeeNumber: 32,
-    accountNumber: '234234576576576545',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-   
-  },
-  {
-    key: '2',
-    name: 'فرشاد کاظمی',
-    employeeNumber: 42,
-    accountNumber: '2342343435435435452',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'علی جهان',
-    employeeNumber: 32,
-    accountNumber: '23454643545345435',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'مریم قربانی',
-    employeeNumber: 32,
-    accountNumber: '8667456534546576787',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'حسن احمدی',
-    employeeNumber: 32,
-    accountNumber: '6553457653424465756',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'امیرحسین بنکدار',
-    employeeNumber: 42,
-    accountNumber: '676576574ث565645645',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '23786845657657546',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '4354354565465677687',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'John Brown',
-    employeeNumber: 32,
-    accountNumber: '56768787876876567658',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    employeeNumber: 42,
-    accountNumber: '76678978768657657',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '45654665765765767835',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '456456345467689879',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'John Brown',
-    employeeNumber: 32,
-    accountNumber: '2423444556678894645',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    employeeNumber: 42,
-    accountNumber: '876575645678784565464',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '2343576878978567567',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '2343547665756754654',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'رامتین نوروزی',
-    employeeNumber: 32,
-    accountNumber: '234234576576576545',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-   
-  },
-  {
-    key: '2',
-    name: 'فرشاد کاظمی',
-    employeeNumber: 42,
-    accountNumber: '2342343435435435452',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'علی جهان',
-    employeeNumber: 32,
-    accountNumber: '23454643545345435',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'مریم قربانی',
-    employeeNumber: 32,
-    accountNumber: '8667456534546576787',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'حسن احمدی',
-    employeeNumber: 32,
-    accountNumber: '6553457653424465756',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'امیرحسین بنکدار',
-    employeeNumber: 42,
-    accountNumber: '676576574ث565645645',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '23786845657657546',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '4354354565465677687',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'John Brown',
-    employeeNumber: 32,
-    accountNumber: '56768787876876567658',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    employeeNumber: 42,
-    accountNumber: '76678978768657657',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '45654665765765767835',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '456456345467689879',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'John Brown',
-    employeeNumber: 32,
-    accountNumber: '2423444556678894645',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    employeeNumber: 42,
-    accountNumber: '876575645678784565464',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '2343576878978567567',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '2343547665756754654',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'رامتین نوروزی',
-    employeeNumber: 32,
-    accountNumber: '234234576576576545',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-   
-  },
-  {
-    key: '2',
-    name: 'فرشاد کاظمی',
-    employeeNumber: 42,
-    accountNumber: '2342343435435435452',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'علی جهان',
-    employeeNumber: 32,
-    accountNumber: '23454643545345435',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'مریم قربانی',
-    employeeNumber: 32,
-    accountNumber: '8667456534546576787',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'حسن احمدی',
-    employeeNumber: 32,
-    accountNumber: '6553457653424465756',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'امیرحسین بنکدار',
-    employeeNumber: 42,
-    accountNumber: '676576574ث565645645',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '23786845657657546',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '4354354565465677687',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'John Brown',
-    employeeNumber: 32,
-    accountNumber: '56768787876876567658',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    employeeNumber: 42,
-    accountNumber: '76678978768657657',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '45654665765765767835',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '456456345467689879',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '1',
-    name: 'John Brown',
-    employeeNumber: 32,
-    accountNumber: '2423444556678894645',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    employeeNumber: 42,
-    accountNumber: '876575645678784565464',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    employeeNumber: 32,
-    accountNumber: '2343576878978567567',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    employeeNumber: 32,
-    accountNumber: '2343547665756754654',
-    codeShobe:"3432432432432",
-    column5:"365476546345",
-    column6:"85645634534"
-  },
- 
+import { useSelector, useDispatch } from 'react-redux'
+const data = [{ "id": 1, "bm": "10", "br": "6663", "no_acc": "10004", "name": "نوروزعلى بيات", "emply_no": "", "dateupdate": "000000" }, { "id": 2, "bm": "10", "br": "6663", "no_acc": "10012", "name": "ملکه دنيالى", "emply_no": "", "dateupdate": "000000" }, { "id": 3, "bm": "10", "br": "6663", "no_acc": "10020", "name": "مرضيه دھقان سلمان", "emply_no": "", "dateupdate": "780129" }, { "id": 4, "bm": "10", "br": "6663", "no_acc": "1003", "name": "حاج جعفرثمرى", "emply_no": "", "dateupdate": "000000" }, { "id": 5, "bm": "10", "br": "6663", "no_acc": "10038", "name": "کبرى خلج", "emply_no": "", "dateupdate": "830806" }, { "id": 6, "bm": "10", "br": "6663", "no_acc": "10046", "name": "مينادره پرست ملکزاده", "emply_no": "", "dateupdate": "000000" }, { "id": 7, "bm": "10", "br": "6663", "no_acc": "10053", "name": "صديقه روزبھانى", "emply_no": "", "dateupdate": "000000" }, { "id": 8, "bm": "10", "br": "6663", "no_acc": "10061", "name": "گلبرارعليزاده", "emply_no": "", "dateupdate": "760114" }, { "id": 9, "bm": "10", "br": "6663", "no_acc": "10079", "name": "صديقه فداؤى پور", "emply_no": "", "dateupdate": "760114" }, { "id": 10, "bm": "10", "br": "6663", "no_acc": "10087", "name": "صادق مھماندوست", "emply_no": "", "dateupdate": "760114" }]
 
-];
+  ;
 
 
 const Tooltips = () => {
-const [mockData,setMockData]=useState(data)
-const [toggle,setToggle]=useState(false)
+  const [mockData, setMockData] = useState([])
+  const [toggle, setToggle] = useState(false)
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -487,39 +52,52 @@ const [toggle,setToggle]=useState(false)
   const [getDetail, setGetDetail] = useState();
   const [nameKarmandy, setNameKarmandy] = useState();
   const [codeShobe, setCodeShobe] = useState();
+  const [validated, setValidated] = useState(false)
+  const [fromDate, setFromDate] = useState(null)
+  const [toDate, setToDate] = useState(null)
+  const [employeeNumber, setEmployeeNumber] = useState(null)
+  const [accountNumber, setAccountNumber] = useState(null)
 
+  const sidebarShow = useSelector((state) => state.sidebarShow)
+  useEffect(() => {
+     fetch('http://localhost:62548/weatherforecast/GetVW_Get_BrMast')
+    //fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(json => setMockData(json))
+      //.then(json => setMockData(data))
+  }, [])
+  const handleSearchData = () => {
 
-
-  const handleSearchData = ()=>{
-    console.log(mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.codeShobe==codeShobe && el.employeeNumber==employeeNumber ))
-  setToggle(true)
+    fetch(`http://localhost:62548/weatherforecast/GetVW_Get_BrMast?br=${codeShobe}&no_acc=${accountNumber}&name=${nameKarmandy}`)
+      .then(response => response.json())
+      .then(json => setMockData(json))
   }
   const columns = [
     {
       title: 'نام و نام خانوادگی',
       dataIndex: 'name',
       key: 'name',
-     
+
     },
     {
       title: 'شماره کارمندی',
-      dataIndex: 'employeeNumber',
-      key: 'employeeNumber',
-   
-   //   ...getColumnSearchProps('age'),
+      dataIndex: 'emply_no',
+      key: 'emply_no',
+
+      //   ...getColumnSearchProps('age'),
     },
     {
       title: 'شماره حساب',
-      dataIndex: 'accountNumber',
-      key: 'accountNumber',
-      
+      dataIndex: 'no_acc',
+      key: 'no_acc',
+
       // sorter: (a, b) => a.address.length - b.address.length,
       // sortDirections: ['descend', 'ascend'],
     },
     {
       title: 'کد شعبه ',
-      dataIndex: 'codeShobe',
-      key: 'codeShobe',
+      dataIndex: 'br',
+      key: 'br',
       // sorter: (a, b) => a.address.length - b.address.length,
       // sortDirections: ['descend', 'ascend'],
     },
@@ -544,149 +122,134 @@ const [toggle,setToggle]=useState(false)
       dataIndex: '',
       key: 'x',
       render: (e) =>
-        <FaFolderOpen style={{cursor:"pointer"}} onClick={()=>{sendDet(e)}} />
-     
-,
+        <FaFolderOpen style={{ cursor: "pointer" }} onClick={() => { sendDet(e) }} />
+
+      ,
     },
   ];
 
-  const [validated, setValidated] = useState(false)
-  const [fromDate, setFromDate] = useState(null)
-  const [toDate, setToDate] = useState(null)
-  const [employeeNumber, setEmployeeNumber] = useState(null)
-  const [accountNumber, setAccountNumber] = useState(null)
-
-  console.log(mockData,mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.codeShobe==codeShobe && el.employeeNumber==employeeNumber ),toggle)
 
   const handleSubmit = (e) => {
-e.preventDefault()
+    e.preventDefault()
   }
-  const inputHandlerFromDate = (e)=>{
+  const inputHandlerFromDate = (e) => {
     console.log(e._d)
     setFromDate(e)
   }
-  const inputHandlerToDate = (e)=>{
+  const inputHandlerToDate = (e) => {
     setToDate(e)
   }
-  const emptyInputs = ()=>{
-setAccountNumber('')
-setEmployeeNumber('')
-setFromDate(null)
-setToDate(null)
+  const emptyInputs = () => {
+    setAccountNumber('')
+    setEmployeeNumber('')
+    setFromDate(null)
+    setToDate(null)
 
   }
-  const sendDet = (e)=>{
+  const sendDet = (e) => {
+    console.log(e)
     setGetDetail(e)
     setOpenModalDetail(true)
-    
+
   }
   return (
     <>
-    {
-      window.localStorage.getItem("TOKENAVIN") ?  
-      <div  >
-      <CForm
-        className="row g-3 needs-validation"
-        noValidate
-        validated={validated}
-        onSubmit={handleSubmit}
-        style={{fontSize:"11px",fontWeight:"800"}}
-      >
-       
-       
-   
-        <CCol md={2} className="position-relative">
-          <CFormLabel htmlFor="validationTooltip05">شماره کارمندی : </CFormLabel>
-          <CFormInput min={0} type="number" id="validationTooltip05" value={employeeNumber} onChange={(e)=>{setEmployeeNumber(e.target.value)}}  />
-          <CFormFeedback tooltip invalid>
-            Please provide a valid zip.
-          </CFormFeedback>
-        </CCol>
-        <CCol md={2} className="position-relative" >
-          <CFormLabel htmlFor="validationTooltip05"  >  شماره حساب : </CFormLabel>
-          <CFormInput type="number" min={0} id="validationTooltip05" value={accountNumber} onChange={(e)=>{setAccountNumber(e.target.value)}}  />
-          <CFormFeedback tooltip invalid>
-            Please provide a valid zip.
-          </CFormFeedback>
-        </CCol>
-        <CCol md={2} className="position-relative" >
-          <CFormLabel htmlFor="validationTooltip05"  >  نام و نام خانوادگی : </CFormLabel>
-          <CFormInput  id="validationTooltip06" value={nameKarmandy} onChange={(e)=>{setNameKarmandy(e.target.value)}}   />
-          <CFormFeedback tooltip invalid>
-            Please provide a valid zip.
-          </CFormFeedback>
-        </CCol>
-        <CCol md={2} className="position-relative" >
-          <CFormLabel htmlFor="validationTooltip05"  > کد شعبه: </CFormLabel>
-          <CFormInput type="number" min={0} id="validationTooltip07" value={codeShobe}  onChange={(e)=>{setCodeShobe(e.target.value)}}   />
-          <CFormFeedback tooltip invalid>
-            Please provide a valid zip.
-          </CFormFeedback>
-        </CCol>
-       
-        <CCol md={2} className="position-relative">
-          <CFormLabel >از تاریخ :</CFormLabel>
-          <InputDatePicker onChange={inputHandlerFromDate} value={fromDate} style={{minWidth:"140px"}}  />
-       
-        </CCol>
-        <CCol md={2} className="">
-          <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
-          <InputDatePicker  onChange={inputHandlerToDate}  value={toDate}  style={{minWidth:"140px"}} />
-                  <CFormFeedback tooltip valid>
-            Looks good!
-          </CFormFeedback>
-        </CCol>
-        <CCol md={12} className="position-relative" >
-        </CCol>
-        <CCol style={{maxWidth:"10%"}} className="position-relative " >
-          <CButton onClick={handleSearchData}  type="submit" style={{fontSize:"10px",fontWeight:"400",   backgroundColor:"#4CAF50",color:"white"}}>
-        
-         جستجو
-         <FaMagnifyingGlass className='mx-1'  />
-          </CButton>
-        </CCol>
-        <CCol xs={2} className="position-relative ">
-          <CButton style={{fontSize:"10px",fontWeight:"400",color:"#FFF",backgroundColor:"#e33044"}} onClick={emptyInputs} >
+      {
+        window.localStorage.getItem("TOKENAVIN") ?
+          <div  >
+            <CForm
+              className="row g-3 needs-validation"
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+              style={{ fontSize: "11px", fontWeight: "800" }}
+            >
+
+
+
+              <CCol md={2} className="position-relative">
+                <CFormLabel htmlFor="validationTooltip05">شماره کارمندی : </CFormLabel>
+                <CFormInput min={0} type="number" id="validationTooltip05" value={employeeNumber} onChange={(e) => { setEmployeeNumber(e.target.value) }} />
+                <CFormFeedback tooltip invalid>
+                  Please provide a valid zip.
+                </CFormFeedback>
+              </CCol>
+              <CCol md={2} className="position-relative" >
+                <CFormLabel htmlFor="validationTooltip05"  >  شماره حساب : </CFormLabel>
+                <CFormInput type="number" min={0} id="validationTooltip05" value={accountNumber} onChange={(e) => { setAccountNumber(e.target.value) }} />
+                <CFormFeedback tooltip invalid>
+                  Please provide a valid zip.
+                </CFormFeedback>
+              </CCol>
+              <CCol md={2} className="position-relative" >
+                <CFormLabel htmlFor="validationTooltip05"  >  نام و نام خانوادگی : </CFormLabel>
+                <CFormInput id="validationTooltip06" value={nameKarmandy} onChange={(e) => { setNameKarmandy(e.target.value) }} />
+                <CFormFeedback tooltip invalid>
+                  Please provide a valid zip.
+                </CFormFeedback>
+              </CCol>
+              <CCol md={2} className="position-relative" >
+                <CFormLabel htmlFor="validationTooltip05"  > کد شعبه: </CFormLabel>
+                <CFormInput type="number" min={0} id="validationTooltip07" value={codeShobe} onChange={(e) => { setCodeShobe(e.target.value) }} />
+                <CFormFeedback tooltip invalid>
+                  Please provide a valid zip.
+                </CFormFeedback>
+              </CCol>
+
+              <CCol md={2} className="position-relative">
+                <CFormLabel >از تاریخ :</CFormLabel>
+                <InputDatePicker onChange={inputHandlerFromDate} value={fromDate} style={{ minWidth: "140px" }} />
+
+              </CCol>
+              <CCol md={2} className="">
+                <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
+                <InputDatePicker onChange={inputHandlerToDate} value={toDate} style={{ minWidth: "140px" }} />
+                <CFormFeedback tooltip valid>
+                  Looks good!
+                </CFormFeedback>
+              </CCol>
+              <CCol md={12} className="position-relative" >
+              </CCol>
+              <CCol style={{ maxWidth: "10%" }} className="position-relative " >
+                <CButton
+                  onClick={handleSearchData}
+                  type="submit" style={{ fontSize: "10px", fontWeight: "400", backgroundColor: "#4CAF50", color: "white" }}>
+                  <FaMagnifyingGlass className='mx-1' />
+                  جستجو
+
+                </CButton>
+              </CCol>
+              <CCol xs={2} className="position-relative ">
+                {/* <CButton style={{fontSize:"10px",fontWeight:"400",color:"#FFF",backgroundColor:"#e33044"}} onClick={emptyInputs} >
          پاک کردن پارامتر
-          </CButton>
-        </CCol>
-      </CForm>
-      <div className='w-100 text-end' >
-      <CButton  onClick={()=>{exportToExcel(columns,data)}} style={{fontSize:"10px",backgroundColor:"#4CAF50",color:"white"}} >
-        {/* <span> خروجی اکسل </span> */}
-        <FaRegFileExcel />
-      </CButton>
-  
-      </div>
- {
-   employeeNumber && accountNumber && nameKarmandy && codeShobe && toggle
-  
-  ?     <>  <Table rowClassName={(record,index)=>index%2===0 ?'stripedRow' :'stripedRow2'}   columns={columns} dataSource={mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.codeShobe==codeShobe && el.employeeNumber==employeeNumber )}  pagination={{ pageSize:50 }} scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  /></>
+          </CButton> */}
+              </CCol>
+            </CForm>
+            <div className='w-100 text-end' >
+              <CButton onClick={() => { exportToExcel(columns, data) }} style={{ fontSize: "10px", backgroundColor: "#4CAF50", color: "white" }} >
+                {/* <span> خروجی اکسل </span> */}
+                <FaRegFileExcel />
+              </CButton>
 
-  
-  :     employeeNumber && accountNumber && nameKarmandy && toggle 
+            </div>
 
-  ? <><Table rowClassName={(record,index)=>index%2===0 ?'stripedRow' :'stripedRow2'}   columns={columns} dataSource={mockData.filter((el)=>el.name==nameKarmandy && el.accountNumber==accountNumber && el.employeeNumber==employeeNumber )}  pagination={{ pageSize:50 }} scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  /></>
-  
-  : <Table rowClassName={(record,index)=>index%2===0 ?'stripedRow' :'stripedRow2'}   columns={columns} dataSource={[...mockData]}  pagination={{ pageSize:50 }} scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  />
+            <Table rowClassName={(record, index) => index % 2 === 0 ? 'stripedRow' : 'stripedRow2'} columns={columns} dataSource={[...mockData]} pagination={{ pageSize: 50 }} scroll={{ y: 340 }} bordered style={{ marginTop: "20px", textAlign: "center", fontFamily: "IranSans", fontSize: "10px" }} size="small" />
+            <CModal
+              visible={openModalDetail}
+              onClose={() => setOpenModalDetail(false)}
+              aria-labelledby="LiveDemoExampleLabel"
+              size='xl'
+            >
+              <CModalHeader style={{ padding: "10px" }} >
+                <CModalTitle id="LiveDemoExampleLabel" style={{ fontSize: "13px" }} > صورتحساب </CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+                <DetGrid getDetail={getDetail} />
+              </CModalBody>
 
- }
-      <CModal
-      visible={openModalDetail}
-      onClose={() => setOpenModalDetail(false)}
-      aria-labelledby="LiveDemoExampleLabel"
-    size='xl'
-    >
-      <CModalHeader>
-        <CModalTitle id="LiveDemoExampleLabel" style={{fontSize:"13px"}} > صورتحساب </CModalTitle>
-      </CModalHeader>
-      <CModalBody>
-     <DetGrid getDetail={getDetail} />
-      </CModalBody>
-      
-    </CModal>
-    
-      {/* <CTable className='my-5' style={{fontSize:"12px"}} >
+            </CModal>
+
+            {/* <CTable className='my-5' style={{fontSize:"12px"}} >
     <CTableHead>
       <CTableRow>
         <CTableHeaderCell scope="col">ردیف</CTableHeaderCell>
@@ -717,24 +280,24 @@ setToDate(null)
       </CTableRow>
     </CTableBody>
   </CTable> */}
-      </div> :
-      window.location.href="http://localhost:3000/#/login"
-    }
-   
+          </div> :
+          window.location.href = "http://localhost:3000/#/login"
+      }
+
     </>
-   
+
   )
 }
 
 const Validation = () => {
   return (
     <CRow>
-     
+
 
       <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader style={{fontSize:"13px",backgroundColor:"#212631",color:"white"}} >
-         فرم نمونه
+        <CCard className="mb-4"  >
+          <CCardHeader style={{ fontSize: "13px", backgroundColor: "#212631", color: "white" }} >
+            گزارش صورتحساب
           </CCardHeader>
           <CCardBody>
 

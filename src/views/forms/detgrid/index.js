@@ -1,697 +1,26 @@
 import { CButton, CCol, CForm, CFormCheck, CFormInput, CFormLabel, CFormSelect, CInputGroup, CInputGroupText } from "@coreui/react"
 import { InputDatePicker } from "jalaali-react-date-picker";
 import { Button, Input, Space, Table } from 'antd';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SearchOutlined } from '@ant-design/icons';
 import { FaFolderOpen, FaRegFileExcel } from "react-icons/fa6";
 import { exportToExcel } from "../../../utils/exportExcel";
 
-const data = [
-    {
-      key: '1',
-      name: 'رامتین نوروزی',
-      age: 32,
-      address: '234234576576576545',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-      column7:"1402/03/25",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-      column11:"تهران",
-
-
-     
-    },
-    {
-      key: '2',
-      name: 'فرشاد کاظمی',
-      age: 42,
-      address: '2342343435435435452',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'علی جهان',
-      age: 32,
-      address: '23454643545345435',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'مریم قربانی',
-      age: 32,
-      address: '8667456534546576787',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-      column8:"قراردادی",
-      column9:"1504871",
-      column10:"412486",
-    },
-    {
-      key: '1',
-      name: 'حسن احمدی',
-      age: 32,
-      address: '6553457653424465756',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534"
-      ,
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'امیرحسین بنکدار',
-      age: 42,
-      address: '676576574ث565645645',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-      
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '23786845657657546',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '4354354565465677687',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '56768787876876567658',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: '76678978768657657',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-      column8:"قراردادی",
-      column9:"1504871",
-      column10:"412486",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '45654665765765767835',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '456456345467689879',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '2423444556678894645',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: '876575645678784565464',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '2343576878978567567',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '2343547665756754654',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'رامتین نوروزی',
-      age: 32,
-      address: '234234576576576545',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-     
-    },
-    {
-      key: '2',
-      name: 'فرشاد کاظمی',
-      age: 42,
-      address: '2342343435435435452',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'علی جهان',
-      age: 32,
-      address: '23454643545345435',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'مریم قربانی',
-      age: 32,
-      address: '8667456534546576787',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'حسن احمدی',
-      age: 32,
-      address: '6553457653424465756',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'امیرحسین بنکدار',
-      age: 42,
-      address: '676576574ث565645645',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '23786845657657546',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '4354354565465677687',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '56768787876876567658',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: '76678978768657657',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '45654665765765767835',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '456456345467689879',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '2423444556678894645',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: '876575645678784565464',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '2343576878978567567',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '2343547665756754654',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'رامتین نوروزی',
-      age: 32,
-      address: '234234576576576545',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-     
-    },
-    {
-      key: '2',
-      name: 'فرشاد کاظمی',
-      age: 42,
-      address: '2342343435435435452',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'علی جهان',
-      age: 32,
-      address: '23454643545345435',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'مریم قربانی',
-      age: 32,
-      address: '8667456534546576787',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'حسن احمدی',
-      age: 32,
-      address: '6553457653424465756',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'امیرحسین بنکدار',
-      age: 42,
-      address: '676576574ث565645645',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '23786845657657546',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '4354354565465677687',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '56768787876876567658',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: '76678978768657657',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '45654665765765767835',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '456456345467689879',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: '2423444556678894645',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: '876575645678784565464',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: '2343576878978567567',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: '2343547665756754654',
-      column4:"3432432432432",
-      column5:"365476546345",
-      column6:"85645634534",
-       column7:"1402/03/25",
-      column8:"رسمی",
-      column9:"1504871",
-      column10:"412486",
-      column11:"تهران",
-    },
-   
-  
-  ];
+const data = [{"id":1,"bm":"10","br":"8823","no_acc":"3708713","date_circl":"830503","qty":"4557","new_qty":"768869","no_sand":"830430","kind_code":"79","tim":"082500"},{"id":2,"bm":"10","br":"8823","no_acc":"3714750","date_circl":"831030","qty":"11504","new_qty":"2888475","no_sand":"700","kind_code":"79","tim":"151553"},{"id":3,"bm":"10","br":"8823","no_acc":"3700025","date_circl":"830105","qty":"290","new_qty":"55865","no_sand":"821228","kind_code":"79","tim":"125456"},{"id":4,"bm":"10","br":"8823","no_acc":"3706964","date_circl":"830503","qty":"713","new_qty":"122435","no_sand":"830430","kind_code":"79","tim":"082442"},{"id":5,"bm":"10","br":"8823","no_acc":"3703118","date_circl":"830202","qty":"10599","new_qty":"4236452","no_sand":"830130","kind_code":"79","tim":"080332"},{"id":6,"bm":"10","br":"8823","no_acc":"3701680","date_circl":"830401","qty":"3568","new_qty":"85840","no_sand":"830331","kind_code":"79","tim":"111151"},{"id":7,"bm":"10","br":"8823","no_acc":"3705004","date_circl":"830819","qty":"10000000","new_qty":"15780973","no_sand":"959099","kind_code":"73","tim":"130736"},{"id":8,"bm":"10","br":"8823","no_acc":"3713140","date_circl":"830202","qty":"107578","new_qty":"29132002","no_sand":"830130","kind_code":"79","tim":"080528"},{"id":9,"bm":"10","br":"8823","no_acc":"3708713","date_circl":"830602","qty":"4588","new_qty":"773426","no_sand":"830601","kind_code":"79","tim":"074641"},{"id":10,"bm":"10","br":"8823","no_acc":"3714750","date_circl":"831030","qty":"106849","new_qty":"2899979","no_sand":"1040211300","kind_code":"78","tim":"153338"}];
 
 export const DetGrid = ({getDetail})=>{
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [openModalDetail, setOpenModalDetail] = useState(false);
+    const[mockData,setMockData]=useState([])
+    useEffect(() => {
+       fetch('http://localhost:62548/weatherforecast/GetTranAll')
+     // fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => response.json())
+        .then(json => setMockData(json))
+       // .then(json => setMockData(data))
+    }, [])
+  
 
     const searchInput = useRef(null);
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -703,100 +32,7 @@ export const DetGrid = ({getDetail})=>{
       clearFilters();
       setSearchText('');
     };
-    const getColumnSearchProps = (dataIndex) => ({
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-        <div
-          style={{
-            padding: 8,
-          }}
-          onKeyDown={(e) => e.stopPropagation()}
-        >
-          <Input
-            ref={searchInput}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{
-              marginBottom: 8,
-              display: 'block',
-            }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{
-                width: 90,
-              }}
-            >
-              جستجو
-            </Button>
-            <Button
-              onClick={() => clearFilters && handleReset(clearFilters)}
-              size="small"
-              style={{
-                width: 90,
-              }}
-            >
-              پاک کردن
-            </Button>
-            {/* <Button
-              type="link"
-              size="small"
-              onClick={() => {
-                confirm({
-                  closeDropdown: false,
-                });
-                setSearchText(selectedKeys[0]);
-                setSearchedColumn(dataIndex);
-              }}
-            >
-              Filter
-            </Button> */}
-            <Button
-              type="link"
-              size="small"
-              onClick={() => {
-                close();
-              }}
-            >
-              بستن
-            </Button>
-          </Space>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined
-          style={{
-            color: filtered ? '#1677ff' : undefined,
-          }}
-        />
-      ),
-      onFilter: (value, record) =>
-        record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-      onFilterDropdownOpenChange: (visible) => {
-        if (visible) {
-          setTimeout(() => searchInput.current?.select(), 100);
-        }
-      },
-      render: (text) =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{
-              backgroundColor: '#ffc069',
-              padding: 0,
-            }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text ? text.toString() : ''}
-          />
-        ) : (
-          text
-        ),
-    });
+
     const columns = [
         {
             title: 'ردیف',
@@ -808,31 +44,45 @@ export const DetGrid = ({getDetail})=>{
           },
           
        
-        {
-            title: ' تاریخ ',
-            dataIndex: 'column7',
-            key: 'column7',
+        // {
+        //     title: ' تاریخ ',
+        //     dataIndex: 'column7',
+        //     key: 'column7',
+        //     width:"10%",
+          
+        //   },
+         {
+            title: ' استان ',
+            dataIndex: 'bm',
+            key: 'bm',
             width:"10%",
           
           },
           {
-            title: ' نوع سند ',
-            dataIndex: 'column8',
-            key: 'column8',
+            title: ' کذ سند ',
+            dataIndex: 'no_sand',
+            key: 'no_sand',
+            width:"10%",
+        
+          },
+          {
+            title: '  شرح سند ',
+            dataIndex: 'kind_code',
+            key: 'kind_code',
             width:"10%",
         
           },
           {
             title: ' مبلغ ',
-            dataIndex: 'column9',
-            key: 'column9',
+            dataIndex: 'qty',
+            key: 'qty',
             width:"10%",
           
           },
           {
             title: ' مانده ',
-            dataIndex: 'column10',
-            key: 'column10',
+            dataIndex: 'new_qty',
+            key: 'new_qty',
             width:"10%",
            
           },
@@ -855,68 +105,76 @@ export const DetGrid = ({getDetail})=>{
        
       ];
     return(<>
-        <CForm className="row g-3" style={{fontSize:"11px",textAlign:"center"}} >
+        <CForm className="row g-3 my-3" style={{fontSize:"11px",textAlign:"center"}} >
   <CCol md={2}>
-    <CFormInput
+    {/* <CFormInput
       type="text"
       id="validationDefault01"
       label="نام و نام خانوادگی"
      value={getDetail?.name}
       disabled
       style={{fontSize:"11px",textAlign:"center"}}
-    />
+    /> */}
+    <labe   >  نام و نام خانوادگی  : </labe>
+    <span>{getDetail?.name}</span>
+    
   </CCol>
   
   
-  <CCol md={3}>
-    <CFormInput
+  <CCol md={2}>
+    {/* <CFormInput
       type="text"
       id="validationDefault01"
       label="شماره حساب"
       value={getDetail?.column5}
       disabled
       style={{fontSize:"11px",textAlign:"center"}}
-    />
+    /> */}
+    <labe   >  شماره حساب : </labe>
+    <span>{getDetail?.no_acc}</span>
   </CCol>
   
 
-  <CCol md={3}>
-    <CFormInput
+  <CCol md={2}>
+    {/* <CFormInput
       type="text"
       id="validationDefault01"
       label="شماره کارمندی"
       value={getDetail?.column6}
       disabled
       style={{fontSize:"11px",textAlign:"center"}}
-    />
+    /> */}
+    <labe   >  شماره کارمندی : </labe>
+    <span>{getDetail?.emply_no}</span>
   </CCol>
   <CCol md={2}>
-    <CFormInput
+    {/* <CFormInput
       type="text"
       id="validationDefault01"
       label="کد شعبه"
       value={getDetail?.age}
       disabled
       style={{fontSize:"11px",textAlign:"center"}}
-    />
+    /> */}
 
 
-
+<labe   > کد شعبه : </labe>
+    <span>{getDetail?.br}</span>
 
 
   </CCol>
-  <CCol md={2}>
-   
-  </CCol>
+
   <CCol md={2} className="position-relative">
-          <CFormLabel >از تاریخ :</CFormLabel>
-          <InputDatePicker disabled style={{minWidth:"30px"}} />
-       
+          {/* <CFormLabel >از تاریخ :</CFormLabel>
+          <InputDatePicker disabled style={{minWidth:"30px"}} /> */}
+       <labe   > از تاریخ  : </labe>
+    <span>-</span>
         </CCol>
         <CCol md={2} className="">
-          <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
-          <InputDatePicker disabled   style={{minWidth:"30px"}}  />
-               
+          {/* <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
+          <InputDatePicker disabled   style={{minWidth:"30px"}}  /> */}
+               <labe   > تا تاریخ  : </labe>
+    <span>-</span>   
         </CCol>
 
   
@@ -928,7 +186,7 @@ export const DetGrid = ({getDetail})=>{
         <FaRegFileExcel />
       </CButton>
 </div>
-<Table   columns={columns} dataSource={data} pagination={false}   scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  />
+<Table   columns={columns} dataSource={mockData} pagination={false}   scroll={{ y: 340 }} bordered style={{marginTop:"20px",textAlign:"center",fontFamily:"IranSans",fontSize:"10px"}} size="small"  />
 
 </>
     )

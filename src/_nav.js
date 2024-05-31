@@ -149,7 +149,7 @@ const _nav = [
   // },
   {
     component: CNavGroup,
-    name: ' فرم های سیستمی ',
+    name: ' گزارشات',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       // {
@@ -189,7 +189,7 @@ const _nav = [
       // },
       {
         component: CNavItem,
-        name: 'فرم نمونه',
+        name: 'گزارش صورتحساب',
         to: '/forms/validation',
       },
     ],
@@ -269,7 +269,7 @@ const _nav = [
   // },
   {
     component: CNavGroup,
-    name: 'صفحه های نمونه',
+    name: 'مدیریت كاربران',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
     items: [
       {
