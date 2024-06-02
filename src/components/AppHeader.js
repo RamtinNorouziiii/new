@@ -47,14 +47,14 @@ const AppHeader = () => {
 
   return (
     <CHeader position="sticky" className="mb-4 p-0" ref={headerRef} style={{backgroundColor:"#EAEAEA"}} >
-      <CContainer className="border-bottom px-4" fluid>
+      <CContainer className="border-bottom px-4" style={{minHeight:"35px"}} fluid>
         <CHeaderToggler
           onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
           style={{ marginInlineStart: '-14px' }}
         >
           <CIcon icon={cilMenu} size="lg" style={{color:"#212631"}}  />
         </CHeaderToggler>
-        <CHeaderNav className="d-none d-md-flex" style={{fontSize:"11px"}}>
+        <CHeaderNav className="d-none d-md-flex " style={{fontSize:"11px"}}  >
           {/* <CNavItem>
             <CNavLink to="/dashboard" as={NavLink}>
               Dashboard
@@ -69,7 +69,7 @@ const AppHeader = () => {
           کاربر علیرضا مرادی خوش آمدید !
         </CHeaderNav>
         <CHeaderNav className="mx-auto">
-     <p  style={{color:"#de2f43"}} >   سامانه جامع FPL  </p>
+     <p  style={{color:"#de2f43",fontSize:"15px",margin:"0px"}} >   سامانه جامع FPL  </p>
         </CHeaderNav>
         <CHeaderNav>
         {/* <li className="nav-item py-1">

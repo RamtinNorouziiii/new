@@ -67,3 +67,8 @@ background-color: #EAEAEA;
   background-color: white;
 
 }
+
+tbody > tr:hover > td{
+  background: #637292 !important;
+  color : white
+}

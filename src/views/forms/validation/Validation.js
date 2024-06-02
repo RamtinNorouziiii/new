@@ -60,15 +60,15 @@ const Tooltips = () => {
 
   const sidebarShow = useSelector((state) => state.sidebarShow)
   useEffect(() => {
-     fetch('http://localhost:62548/weatherforecast/GetVW_Get_BrMast')
-    //fetch('https://jsonplaceholder.typicode.com/todos')
+    // fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`)
+    fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
-      .then(json => setMockData(json))
-      //.then(json => setMockData(data))
+     // .then(json => setMockData(json))
+      .then(json => setMockData(data))
   }, [])
   const handleSearchData = () => {
 
-    fetch(`http://localhost:62548/weatherforecast/GetVW_Get_BrMast?br=${codeShobe}&no_acc=${accountNumber}&name=${nameKarmandy}`)
+    fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast?br=${codeShobe}&no_acc=${accountNumber}&name=${nameKarmandy}&emply_no=${employeeNumber}`)
       .then(response => response.json())
       .then(json => setMockData(json))
   }
@@ -139,13 +139,7 @@ const Tooltips = () => {
   const inputHandlerToDate = (e) => {
     setToDate(e)
   }
-  const emptyInputs = () => {
-    setAccountNumber('')
-    setEmployeeNumber('')
-    setFromDate(null)
-    setToDate(null)
 
-  }
   const sendDet = (e) => {
     console.log(e)
     setGetDetail(e)
@@ -208,9 +202,9 @@ const Tooltips = () => {
                   Looks good!
                 </CFormFeedback>
               </CCol>
-              <CCol md={12} className="position-relative" >
+              <CCol md={12} className="position-relative m-1"  >
               </CCol>
-              <CCol style={{ maxWidth: "10%" }} className="position-relative " >
+              <CCol style={{ maxWidth: "10%",margin:"0px" }} className="position-relative " >
                 <CButton
                   onClick={handleSearchData}
                   type="submit" style={{ fontSize: "10px", fontWeight: "400", backgroundColor: "#4CAF50", color: "white" }}>
@@ -233,7 +227,7 @@ const Tooltips = () => {
 
             </div>
 
-            <Table rowClassName={(record, index) => index % 2 === 0 ? 'stripedRow' : 'stripedRow2'} columns={columns} dataSource={[...mockData]} pagination={{ pageSize: 50 }} scroll={{ y: 340 }} bordered style={{ marginTop: "20px", textAlign: "center", fontFamily: "IranSans", fontSize: "10px" }} size="small" />
+            <Table rowClassName={(record, index) => index % 2 === 0 ? 'stripedRow' : 'stripedRow2'} columns={columns} dataSource={[...mockData]} pagination={{ pageSize: 50 }} scroll={{ y: 340 }} bordered style={{ textAlign: "center", fontFamily: "IranSans", fontSize: "10px" }} size="small" />
             <CModal
               visible={openModalDetail}
               onClose={() => setOpenModalDetail(false)}
@@ -249,37 +243,7 @@ const Tooltips = () => {
 
             </CModal>
 
-            {/* <CTable className='my-5' style={{fontSize:"12px"}} >
-    <CTableHead>
-      <CTableRow>
-        <CTableHeaderCell scope="col">ردیف</CTableHeaderCell>
-        <CTableHeaderCell scope="col">نام کارمند</CTableHeaderCell>
-        <CTableHeaderCell scope="col">شماره کارمندی</CTableHeaderCell>
-        <CTableHeaderCell scope="col"> شماره حساب</CTableHeaderCell>
-      </CTableRow>
-    </CTableHead>
-    <CTableBody>
-      <CTableRow>
-        <CTableHeaderCell scope="row">1</CTableHeaderCell>
-        <CTableDataCell>ضیایی</CTableDataCell>
-        <CTableDataCell>15289875</CTableDataCell>
-        <CTableDataCell>43568732</CTableDataCell>
-      </CTableRow>
-      <CTableRow>
-        <CTableHeaderCell scope="row">2</CTableHeaderCell>
-        <CTableDataCell>مردانی</CTableDataCell>
-        <CTableDataCell>15289428</CTableDataCell>
-        <CTableDataCell>2468452</CTableDataCell>
-      </CTableRow>
-      <CTableRow>
-        <CTableHeaderCell scope="row">3</CTableHeaderCell>
-        <CTableDataCell >کاظمی</CTableDataCell>
-        <CTableDataCell>152827961</CTableDataCell>
-        <CTableDataCell>1347953</CTableDataCell>
-  
-      </CTableRow>
-    </CTableBody>
-  </CTable> */}
+
           </div> :
           window.location.href = "http://localhost:3000/#/login"
       }

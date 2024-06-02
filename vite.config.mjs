@@ -3,7 +3,14 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import autoprefixer from 'autoprefixer'
 
+const cherryPickedKeys = [
+  "BASE_URL",
+  "SOME_OTHER_KEY_IN_YOUR_ENV_FILE",
+];
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const processEnv = {};
+  cherryPickedKeys.forEach(key => processEnv[key] = env[key]);
   return {
     base: './',
     build: {
@@ -28,6 +35,9 @@ export default defineConfig(({ mode }) => {
           '.js': 'jsx',
         },
       },
+    },
+    define: {
+      'process.env': processEnv
     },
     plugins: [react()],
     resolve: {
