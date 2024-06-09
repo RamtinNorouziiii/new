@@ -11,15 +11,21 @@ export const DetGrid = ({getDetail})=>{
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [openModalDetail, setOpenModalDetail] = useState(false);
+    const [requestToggle, setRequestToggle] = useState(false);
+
     const[mockData,setMockData]=useState([])
     console.log(getDetail)
     useEffect(() => {
-       fetch(`${process.env.BASE_URL}/weatherforecast/GetTranAll?br=${getDetail?.br|| null}&no_acc=${getDetail?.no_acc||null}&emply_no=${getDetail?.emply_no||null}&bm=${getDetail?.bm||null}`)
-     // fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(response => response.json())
-        .then(json => setMockData(json))
-      //  .then(json => setMockData(data))
-    }, [])
+    if(requestToggle){
+      fetch(`${process.env.BASE_URL}/weatherforecast/GetTranAll?br=${getDetail?.br|| null}&no_acc=${getDetail?.no_acc||null}&emply_no=${getDetail?.emply_no||null}&bm=${getDetail?.bm||null}`)
+      // fetch('https://jsonplaceholder.typicode.com/todos')
+         .then(response => response.json())
+         .then(json => setMockData(json))
+       //  .then(json => setMockData(data))
+       alert("SLM")
+    }
+    setRequestToggle(true)
+    }, [requestToggle])
   
 
 
