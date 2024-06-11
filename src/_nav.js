@@ -276,8 +276,8 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'ورود',
-        to: '/login',
+        name: 'اعطای دسترسی',
+        to: '/forms/validation',
       },
       // {
       //   component: CNavItem,

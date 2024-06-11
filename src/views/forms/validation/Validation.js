@@ -37,6 +37,7 @@ import { FaRegFileExcel } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa6";
 import { DetGrid } from '../detgrid';
 import { useSelector, useDispatch } from 'react-redux'
+import toast from 'react-hot-toast';
 const data = [{ "id": 1, "bm": "10", "br": "6663", "no_acc": "10004", "name": "تست یک", "emply_no": "", "dateupdate": "000000" }, { "id": 2, "bm": "10", "br": "6663", "no_acc": "10012", "name": "تست دو", "emply_no": "", "dateupdate": "000000" }, { "id": 3, "bm": "10", "br": "6663", "no_acc": "10020", "name": "تست سه", "emply_no": "", "dateupdate": "780129" }]
 
   ;
@@ -60,15 +61,20 @@ const Tooltips = () => {
 
   const sidebarShow = useSelector((state) => state.sidebarShow)
   useEffect(() => {
-    // fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`)
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`)
+      // fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
-     // .then(json => setMockData(json))
-      .then(json => setMockData(data))
+      .then(json => setMockData(json))
+    //  .then(json => setMockData(data))
   }, [])
   const handleSearchData = () => {
+    if (!employeeNumber && !accountNumber && !nameKarmandy) return toast.error("حداقل باید یکی از فیلد های  شماره کارمندی ، شماره حساب یا نام و نام خانوادگی باید پر باشد ! ", {
+      style: {
+        fontSize: "11px",
 
-    fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast?br=${codeShobe}&no_acc=${accountNumber}&name=${nameKarmandy}&emply_no=${employeeNumber}`)
+      }
+    })
+    fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast?br=${codeShobe || null}&no_acc=${accountNumber || null}&name=${nameKarmandy || null}&emply_no=${employeeNumber || null}`)
       .then(response => response.json())
       .then(json => setMockData(json))
   }
@@ -161,21 +167,21 @@ const Tooltips = () => {
 
 
 
-              <CCol md={2} className="position-relative">
+              <CCol md={3} className="position-relative">
                 <CFormLabel htmlFor="validationTooltip05">شماره کارمندی : </CFormLabel>
                 <CFormInput min={0} type="number" id="validationTooltip05" value={employeeNumber} onChange={(e) => { setEmployeeNumber(e.target.value) }} />
                 <CFormFeedback tooltip invalid>
                   Please provide a valid zip.
                 </CFormFeedback>
               </CCol>
-              <CCol md={2} className="position-relative" >
+              <CCol md={3} className="position-relative" >
                 <CFormLabel htmlFor="validationTooltip05"  >  شماره حساب : </CFormLabel>
                 <CFormInput type="number" min={0} id="validationTooltip05" value={accountNumber} onChange={(e) => { setAccountNumber(e.target.value) }} />
                 <CFormFeedback tooltip invalid>
                   Please provide a valid zip.
                 </CFormFeedback>
               </CCol>
-              <CCol md={2} className="position-relative" >
+              <CCol md={3} className="position-relative" >
                 <CFormLabel htmlFor="validationTooltip05"  >  نام و نام خانوادگی : </CFormLabel>
                 <CFormInput id="validationTooltip06" value={nameKarmandy} onChange={(e) => { setNameKarmandy(e.target.value) }} />
                 <CFormFeedback tooltip invalid>
@@ -204,7 +210,7 @@ const Tooltips = () => {
               </CCol>
               <CCol md={12} className="position-relative m-1"  >
               </CCol>
-              <CCol style={{ maxWidth: "10%",margin:"0px" }} className="position-relative " >
+              <CCol style={{ maxWidth: "10%", margin: "1px" }} className="position-relative " >
                 <CButton
                   onClick={handleSearchData}
                   type="submit" style={{ fontSize: "10px", fontWeight: "400", backgroundColor: "#4CAF50", color: "white" }}>
@@ -220,14 +226,14 @@ const Tooltips = () => {
               </CCol>
             </CForm>
             <div className='w-100 text-end' >
-              <CButton onClick={() => { exportToExcel(columns, data) }} style={{ fontSize: "10px", backgroundColor: "#4CAF50", color: "white" }} >
+              <CButton onClick={() => { exportToExcel(columns, mockData) }} style={{ fontSize: "10px", backgroundColor: "#4CAF50", color: "white" }} >
                 {/* <span> خروجی اکسل </span> */}
                 <FaRegFileExcel />
               </CButton>
 
             </div>
 
-            <Table rowClassName={(record, index) => index % 2 === 0 ? 'stripedRow' : 'stripedRow2'} columns={columns} dataSource={[...mockData]} pagination={{ pageSize: 50 }} scroll={{ y: 340 }} bordered style={{ textAlign: "center", fontFamily: "IranSans", fontSize: "10px" }} size="small" />
+            <Table rowClassName={(record, index) => index % 2 === 0 ? 'stripedRow' : 'stripedRow2'} columns={columns} dataSource={[...mockData]} pagination={{ pageSize: 25 }} scroll={{ y: 340 }} bordered style={{ textAlign: "center", fontFamily: "IranSans", fontSize: "10px" }} size="small" />
             <CModal
               visible={openModalDetail}
               onClose={() => setOpenModalDetail(false)}

@@ -67,8 +67,9 @@ background-color: #EAEAEA;
   background-color: white;
 
 }
-
+tbody > tr tr{
+}
 tbody > tr:hover > td{
-  background: #637292 !important;
-  color : white
+  background: #d4d4d4 !important;
+  transition: background-color 0.01s ease !important;
 }
