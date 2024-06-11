@@ -69,7 +69,7 @@ const AppHeader = () => {
           کاربر علیرضا مرادی خوش آمدید !
         </CHeaderNav>
         <CHeaderNav className="mx-auto">
-     <p  style={{color:"#de2f43",fontSize:"15px",margin:"0px"}} >   سامانه جامع FPL  </p>
+     <p  style={{color:"#de2f43",fontSize:"15px",margin:"0px"}} >   سامانه یکپارچه سازی اطلاعات  </p>
         </CHeaderNav>
         <CHeaderNav>
         {/* <li className="nav-item py-1">

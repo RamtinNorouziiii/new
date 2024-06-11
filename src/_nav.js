@@ -12,6 +12,7 @@ import {
   cilPuzzle,
   cilSpeedometer,
   cilStar,
+  cilClone
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -191,6 +192,7 @@ const _nav = [
         component: CNavItem,
         name: 'گزارش صورتحساب',
         to: '/forms/validation',
+        icon: <CIcon icon={cilClone} customClassName="nav-icon" />
       },
     ],
   },

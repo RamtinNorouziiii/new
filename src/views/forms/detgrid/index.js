@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { SearchOutlined } from '@ant-design/icons';
 import { FaFolderOpen, FaRegFileExcel } from "react-icons/fa6";
 import { exportToExcel } from "../../../utils/exportExcel";
-const data = [{"id":1,"bm":"10","br":"8823","no_acc":"3708713","date_circl":"830503","qty":"4557","new_qty":"768869","no_sand":"830430","kind_code":"79","tim":"082500"},{"id":2,"bm":"10","br":"8823","no_acc":"3714750","date_circl":"831030","qty":"11504","new_qty":"2888475","no_sand":"700","kind_code":"79","tim":"151553"},{"id":3,"bm":"10","br":"8823","no_acc":"3700025","date_circl":"830105","qty":"290","new_qty":"55865","no_sand":"821228","kind_code":"79","tim":"125456"},{"id":4,"bm":"10","br":"8823","no_acc":"3706964","date_circl":"830503","qty":"713","new_qty":"122435","no_sand":"830430","kind_code":"79","tim":"082442"},{"id":5,"bm":"10","br":"8823","no_acc":"3703118","date_circl":"830202","qty":"10599","new_qty":"4236452","no_sand":"830130","kind_code":"79","tim":"080332"},{"id":6,"bm":"10","br":"8823","no_acc":"3701680","date_circl":"830401","qty":"3568","new_qty":"85840","no_sand":"830331","kind_code":"79","tim":"111151"},{"id":7,"bm":"10","br":"8823","no_acc":"3705004","date_circl":"830819","qty":"10000000","new_qty":"15780973","no_sand":"959099","kind_code":"73","tim":"130736"},{"id":8,"bm":"10","br":"8823","no_acc":"3713140","date_circl":"830202","qty":"107578","new_qty":"29132002","no_sand":"830130","kind_code":"79","tim":"080528"},{"id":9,"bm":"10","br":"8823","no_acc":"3708713","date_circl":"830602","qty":"4588","new_qty":"773426","no_sand":"830601","kind_code":"79","tim":"074641"},{"id":10,"bm":"10","br":"8823","no_acc":"3714750","date_circl":"831030","qty":"106849","new_qty":"2899979","no_sand":"1040211300","kind_code":"78","tim":"153338"}];
+const data = [{"id":1,"bm":"10","br":"8823","no_acc":"3708713","date":"1374/10/17","qty":"4557","new_qty":"768869","no_sand":"830430","kind_code":"79","tim":"082500"},{"id":2,"bm":"10","br":"8823","no_acc":"3714750","date":"1398/12/5","qty":"11504","new_qty":"2888475","no_sand":"700","kind_code":"79","tim":"151553"},{"id":3,"bm":"10","br":"8823","no_acc":"3700025","date":"1403/03/20","qty":"290","new_qty":"55865","no_sand":"821228","kind_code":"79","tim":"125456"}];
 
 export const DetGrid = ({getDetail})=>{
     const [searchText, setSearchText] = useState('');
@@ -22,7 +22,7 @@ export const DetGrid = ({getDetail})=>{
          .then(response => response.json())
          .then(json => setMockData(json))
        //  .then(json => setMockData(data))
-       alert("SLM")
+     
     }
     setRequestToggle(true)
     }, [requestToggle])
@@ -49,14 +49,14 @@ export const DetGrid = ({getDetail})=>{
           
         //   },
          {
-            title: ' استان ',
-            dataIndex: 'bm',
-            key: 'bm',
+            title: ' تاریخ ',
+            dataIndex: 'date',
+            key: 'date',
             width:"10%",
           
           },
           {
-            title: ' کذ سند ',
+            title: ' کد سند ',
             dataIndex: 'no_sand',
             key: 'no_sand',
             width:"10%",
@@ -70,7 +70,7 @@ export const DetGrid = ({getDetail})=>{
         
           },
           {
-            title: ' مبلغ ',
+            title: ' مبلغ بدهکار/ بستانکار ',
             dataIndex: 'qty',
             key: 'qty',
             width:"10%",
@@ -144,7 +144,7 @@ export const DetGrid = ({getDetail})=>{
     <labe   >  شماره کارمندی : </labe>
     <span>{getDetail?.emply_no}</span>
   </CCol>
-  <CCol md={2}>
+  <CCol md={1}>
     {/* <CFormInput
       type="text"
       id="validationDefault01"
@@ -160,14 +160,19 @@ export const DetGrid = ({getDetail})=>{
 
 
   </CCol>
-
   <CCol md={2} className="position-relative">
+          {/* <CFormLabel >از تاریخ :</CFormLabel>
+          <InputDatePicker disabled style={{minWidth:"30px"}} /> */}
+       <labe   > استان : </labe>
+    <span>-</span>
+        </CCol>
+  <CCol md={1} className="position-relative">
           {/* <CFormLabel >از تاریخ :</CFormLabel>
           <InputDatePicker disabled style={{minWidth:"30px"}} /> */}
        <labe   > از تاریخ  : </labe>
     <span>-</span>
         </CCol>
-        <CCol md={2} className="">
+        <CCol md={1} className="">
           {/* <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
           <InputDatePicker disabled   style={{minWidth:"30px"}}  /> */}
                <labe   > تا تاریخ  : </labe>
@@ -177,7 +182,7 @@ export const DetGrid = ({getDetail})=>{
   
   
 </CForm>
-<div className="mb-2" style={{float:"left"}} >
+<div className="my-2" style={{float:"left"}} >
 <CButton  onClick={()=>{exportToExcel(columns,data)}} style={{fontSize:"10px",backgroundColor:"#4CAF50",color:"white"}} >
         {/* <span> خروجی اکسل </span> */}
         <FaRegFileExcel />
