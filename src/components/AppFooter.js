@@ -6,7 +6,10 @@ const AppFooter = () => {
     <CFooter className="px-4">
      
       <div className='text-center w-100' >
-        <span style={{fontSize:"11px"}} > کلیه حقوق این وب سایت متعلق به شرکت آوین می‌باشد  </span>
+        <span style={{fontSize:"11px"}} >
+
+        {/* کلیه حقوق این وب سایت متعلق به شرکت آوین می‌باشد   */}
+        </span>
       
       </div>
     </CFooter>

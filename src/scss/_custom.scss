@@ -67,9 +67,18 @@ background-color: #EAEAEA;
   background-color: white;
 
 }
-tbody > tr tr{
-}
+
 tbody > tr:hover > td{
   background: #d4d4d4 !important;
   transition: background-color 0.01s ease !important;
 }
+
+th  {
+  background-color: #084919 !important;
+color: white !important;
+}
+ .btn-close{
+color: white !important;
+background-color: white !important; ;
+}
+

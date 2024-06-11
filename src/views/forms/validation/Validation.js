@@ -58,6 +58,9 @@ const Tooltips = () => {
   const [toDate, setToDate] = useState(null)
   const [employeeNumber, setEmployeeNumber] = useState(null)
   const [accountNumber, setAccountNumber] = useState(null)
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+
 
   const sidebarShow = useSelector((state) => state.sidebarShow)
   useEffect(() => {
@@ -74,6 +77,7 @@ const Tooltips = () => {
 
       }
     })
+  
     fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast?br=${codeShobe || null}&no_acc=${accountNumber || null}&name=${nameKarmandy || null}&emply_no=${employeeNumber || null}`)
       .then(response => response.json())
       .then(json => setMockData(json))
@@ -139,11 +143,30 @@ const Tooltips = () => {
     e.preventDefault()
   }
   const inputHandlerFromDate = (e) => {
-    console.log(e._d)
-    setFromDate(e)
+    if(e===null) { 
+      
+      setFromDate("")
+setStartDate("")
+    }
+   setFromDate(e)
+   setStartDate(new Date(e._d).toLocaleDateString("fa-IR",{
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).replaceAll("/","").slice(2))
   }
   const inputHandlerToDate = (e) => {
+    if(e===null) {
+      
+      setToDate("")
+setEndDate("")
+    }
     setToDate(e)
+    setEndDate(new Date(e._d).toLocaleDateString("fa-IR",{
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).replaceAll("/","").slice(2))
   }
 
   const sendDet = (e) => {
@@ -201,6 +224,10 @@ const Tooltips = () => {
                 <InputDatePicker onChange={inputHandlerFromDate} value={fromDate} style={{ minWidth: "140px" }} />
 
               </CCol>
+              <CCol md={1} className="position-relative">
+
+              </CCol>
+
               <CCol md={2} className="">
                 <CFormLabel htmlFor="validationTooltip02">تا تاریخ :</CFormLabel>
                 <InputDatePicker onChange={inputHandlerToDate} value={toDate} style={{ minWidth: "140px" }} />
@@ -208,9 +235,8 @@ const Tooltips = () => {
                   Looks good!
                 </CFormFeedback>
               </CCol>
-              <CCol md={12} className="position-relative m-1"  >
-              </CCol>
-              <CCol style={{ maxWidth: "10%", margin: "1px" }} className="position-relative " >
+
+              <CCol style={{ maxWidth: "10%", marginTop: "44px" }} className="position-relative " >
                 <CButton
                   onClick={handleSearchData}
                   type="submit" style={{ fontSize: "10px", fontWeight: "400", backgroundColor: "#4CAF50", color: "white" }}>
@@ -240,11 +266,12 @@ const Tooltips = () => {
               aria-labelledby="LiveDemoExampleLabel"
               size='xl'
             >
-              <CModalHeader style={{ padding: "10px" }} >
+              <CModalHeader style={{ padding: "10px",backgroundColor:"rgb(33, 38, 49)",color:"white" }} >
                 <CModalTitle id="LiveDemoExampleLabel" style={{ fontSize: "13px" }} > صورتحساب </CModalTitle>
               </CModalHeader>
               <CModalBody>
-                <DetGrid getDetail={getDetail} />
+                {console.log(startDate,endDate)}
+                <DetGrid getDetail={getDetail} startdate={startDate} enddate={endDate} fromDate={fromDate ?new Date(fromDate?._d).toLocaleDateString("fa-IR") :null} toDate={toDate ? new Date(toDate?._d).toLocaleDateString("fa-IR"):null} />
               </CModalBody>
 
             </CModal>
