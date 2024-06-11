@@ -5,6 +5,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from '../routes'
 import { useSelector, useDispatch } from 'react-redux'
+import Validation from '../views/forms/validation/Validation'
 
 const AppContent = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
@@ -26,7 +27,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to="dashboard" replace />} />
+          <Route path="/" element={<Validation />} />
         </Routes>
       </Suspense>
     </CContainer>

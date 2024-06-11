@@ -84,6 +84,7 @@ console.log(startdate)
       dataIndex: 'qty',
       key: 'qty',
       width: "10%",
+      render: (e, index, _index) => (<>{Number(e).toLocaleString()}</>)
 
     },
     {
@@ -91,6 +92,7 @@ console.log(startdate)
       dataIndex: 'new_qty',
       key: 'new_qty',
       width: "10%",
+      render: (e, index, _index) => (<>{Number(e).toLocaleString()}</>)
 
     },
     // {
@@ -113,7 +115,7 @@ console.log(startdate)
   ];
   return (<>
     <CForm className="row g-3 " style={{ fontSize: "11px" }} >
-      <CCol md={4}>
+      <CCol md={3}>
         {/* <CFormInput
       type="text"
       id="validationDefault01"
@@ -154,7 +156,19 @@ console.log(startdate)
         <labe   >  شماره کارمندی : </labe>
         <span>{getDetail?.emply_no}</span>
       </CCol>
-      <CCol md={2}>
+     
+      
+        <CCol md={2} className="position-relative">
+        
+          {/* <CFormLabel >از تاریخ :</CFormLabel>
+          <InputDatePicker disabled style={{minWidth:"30px"}} /> */}
+          <labe   > استان : </labe>
+          <span>{getDetail?.bm}</span>
+        </CCol>
+
+
+
+        <CCol md={2}>
         {/* <CFormInput
       type="text"
       id="validationDefault01"
@@ -170,14 +184,6 @@ console.log(startdate)
 
 
       </CCol>
-      
-        <CCol md={1} className="position-relative">
-        
-          {/* <CFormLabel >از تاریخ :</CFormLabel>
-          <InputDatePicker disabled style={{minWidth:"30px"}} /> */}
-          <labe   > استان : </labe>
-          <span>{getDetail?.bm}</span>
-        </CCol>
         <Row>
         <CCol md={3} className="position-relative">
           {/* <CFormLabel >از تاریخ :</CFormLabel>

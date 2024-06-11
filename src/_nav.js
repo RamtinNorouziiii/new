@@ -12,7 +12,8 @@ import {
   cilPuzzle,
   cilSpeedometer,
   cilStar,
-  cilClone
+  cilClone,
+  cilKeyboard
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -278,6 +279,7 @@ const _nav = [
         component: CNavItem,
         name: 'اعطای دسترسی',
         to: '/forms/validation',
+        icon: <CIcon icon={cilKeyboard} customClassName="nav-icon" />
       },
       // {
       //   component: CNavItem,
