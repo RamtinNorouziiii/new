@@ -38,6 +38,7 @@ import { FaFolderOpen } from "react-icons/fa6";
 import { DetGrid } from '../detgrid';
 import { useSelector, useDispatch } from 'react-redux'
 import toast from 'react-hot-toast';
+import axios from 'axios';
 const data = [{ "id": 1, "bm": "10", "br": "6663", "no_acc": "10004", "name": "تست یک", "emply_no": "", "dateupdate": "000000" }, { "id": 2, "bm": "10", "br": "6663", "no_acc": "10012", "name": "تست دو", "emply_no": "", "dateupdate": "000000" }, { "id": 3, "bm": "10", "br": "6663", "no_acc": "10020", "name": "تست سه", "emply_no": "", "dateupdate": "780129" }]
 
   ;
@@ -63,14 +64,37 @@ const Tooltips = () => {
 
 
   const sidebarShow = useSelector((state) => state.sidebarShow)
-  useEffect(() => {
-    fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`)
-      // fetch('https://jsonplaceholder.typicode.com/todos')
-      .then(response => response.json())
-      .then(json => setMockData(json))
-    //  .then(json => setMockData(data))
-  }, [])
+  // useEffect(() => {
+  //   fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`)
+  //     // fetch('https://jsonplaceholder.typicode.com/todos')
+  //     .then(response => response.json())
+  //     .then(json => setMockData(json))
+  //   //  .then(json => setMockData(data))
+  // }, [])
+  const clickHandler =async ()=>{
+    // fetch(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`,{
+    //   method:"GET",
+    // credentials:"same-origin",
+    
+
+    // })
+    // .then(sts=>console.log(sts.redirected))
+    //   .then(response => response.json())
+    //   .then(json => setMockData(json))
+    try{
+      const res = await axios.get(`${process.env.BASE_URL}/weatherforecast/GetVW_Get_BrMast`,{
+        withCredentials:true,
+       
+      })
+      console.log(res)
+  
+    }catch(err){
+      console.log("ERROR",err)
+    }
+
+  }
   const handleSearchData = () => {
+   return clickHandler()
     if (!employeeNumber && !accountNumber && !nameKarmandy) return toast.error("حداقل باید یکی از فیلد های  شماره کارمندی ، شماره حساب یا نام و نام خانوادگی باید پر باشد ! ", {
       style: {
         fontSize: "11px",
@@ -177,8 +201,7 @@ setEndDate("")
   }
   return (
     <>
-      {
-        window.localStorage.getItem("TOKENAVIN") ?
+    
           <div  >
             <CForm
               className="row g-3 needs-validation"
@@ -277,9 +300,7 @@ setEndDate("")
             </CModal>
 
 
-          </div> :
-          window.location.href = "http://localhost:3000/#/login"
-      }
+          </div> 
 
     </>
 

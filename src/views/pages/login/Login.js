@@ -21,6 +21,8 @@ import  bankLogo  from 'src/assets/images/bank-logo.png'
 import { RiLoginBoxLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
+import { message } from 'antd'
+import axios from 'axios'
 const Login = () => {
   const navigate = useNavigate()
   const [username,setUsername]=useState()
@@ -34,15 +36,43 @@ setUsername(e.target.value)
  
 }
 }
-const submitForm = ()=>{
-  if(username==="adminAvin" && password==="adminAvin"){
-    window.localStorage.setItem("TOKENAVIN","admin")
-window.location.href="http://localhost:3000/#/forms/validation"
-  }else{
-    window.localStorage.removeItem("TOKENAVIN")
-
-    return toast.error(" نام کاربری یا رمز عبور اشتباه میباشد ")
+const submitForm = async()=>{
+  const data={username,password}
+  try{
+  const res =  await axios.post(`${process.env.BASE_URL}/Authentication`,{
+    username,password
+  },{
+    withCredentials:true,
+  
+  })
+console.log(res.headers.hasAuthorization())
+navigate("/")
+  }catch(err){
+    if(err.response.status===401) return message.error("نام کاربری یا رمز عبور اشتباه است !")
+console.log("ERROR",err)
   }
+// const res = await fetch(`${process.env.BASE_URL}/Authentication`,
+// {
+//   method:"POST",
+//   body:JSON.stringify(data),
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//    redirect: 'follow'
+// }).then((sts)=>{
+//  if (sts.status===401) return message.error("نام کاربری یا رمز عبور اشتباه است !")
+ 
+
+//  navigate("/")
+// })
+//   if(username==="adminAvin" && password==="adminAvin"){
+//     window.localStorage.setItem("TOKENAVIN","admin")
+// window.location.href="http://localhost:3000/#/forms/validation"
+//   }else{
+//     window.localStorage.removeItem("TOKENAVIN")
+
+//     return toast.error(" نام کاربری یا رمز عبور اشتباه میباشد ")
+//   }
 }
   return (
     <div className=" min-vh-100 d-flex flex-row align-items-center loginBg"  >
